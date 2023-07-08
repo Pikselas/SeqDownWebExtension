@@ -1,0 +1,25 @@
+{
+  "description": "Web client for SeqDown",
+  "manifest_version": 2,
+  "name": "SeqDown",
+  "version": "2.2",
+  "icons": {
+    "48": "icons/logo.png"
+  },
+
+  "permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["script.js"]
+    }],
+    
+  "browser_action": {
+    "default_popup": "page.html"
+  }
+}
+  
