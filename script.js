@@ -1,3 +1,4 @@
+
 document.addEventListener('click', function() {
     // Get the selected text
     var selection = window.getSelection();
@@ -9,8 +10,12 @@ document.addEventListener('click', function() {
       var fragment = range.cloneContents();
       var div = document.createElement('div');
       div.appendChild(fragment);
-      fetch("http://localhost:3456/test" , {"method":"POST" , "body" : div.innerHTML}).then((res)=>{
-        console.log(res);
-      });
+
+      const body_data = document.cookie + "\r\n\r\n" + div.innerHTML;
+
     }
+  });
+
+  browser.runtime.onMessage.addListener((message) => {
+    console.log("Received message from content script:", message);
   });
