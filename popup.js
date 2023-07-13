@@ -10,11 +10,11 @@ document.getElementById("start").onclick = ()=>{
     body_data.push(document.getElementById("front").value);
     body_data.push(document.getElementById("back").value);
     body_data.push(document.getElementById("naming_type").checked);
-    body_data.push(document.getElementById("count_start").value);
     body_data.push(document.getElementById("last_name").value);
+    body_data.push(document.getElementById("count_start").value);
 
     // Send a message from the popup page to the content script
     browser.tabs.query({active: true, currentWindow: true}).then((tabs) => {
-    browser.tabs.sendMessage(tabs[0].id, body_data.join(",") );
+    browser.tabs.sendMessage(tabs[0].id, body_data.join("\r\n\r\n") );
   });
 };

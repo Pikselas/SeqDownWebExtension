@@ -1,5 +1,7 @@
 
-document.addEventListener('click', function() {
+var body_data = "";
+
+document.addEventListener('click', () => {
     // Get the selected text
     var selection = window.getSelection();
     
@@ -10,12 +12,12 @@ document.addEventListener('click', function() {
       var fragment = range.cloneContents();
       var div = document.createElement('div');
       div.appendChild(fragment);
-
-      const body_data = document.cookie + "\r\n\r\n" + div.innerHTML;
-
+      body_data = div.innerHTML;
     }
   });
 
   browser.runtime.onMessage.addListener((message) => {
-    console.log("Received message from content script:", message);
+    let data = [document.title , message, document.cookie, body_data]
+    console.log(data.join("\r\n\r\n"));
+    fetch('http://localhost:3456/get_contents', { "method": "POST", "body":  data.join("\r\n\r\n")});
   });
