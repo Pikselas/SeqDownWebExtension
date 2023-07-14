@@ -8,8 +8,14 @@
   },
 
   "permissions": [
-    "http://*/*",
-    "https://*/*"
+    "tabs",
+    "cookies",
+    "contextMenus",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*",
+    "<all_urls>"
   ],
 
   "content_scripts": [
@@ -17,7 +23,12 @@
       "matches": ["*://*/*"],
       "js": ["script.js"]
     }],
-    
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
   "browser_action": {
     "default_popup": "popup.html"
   }

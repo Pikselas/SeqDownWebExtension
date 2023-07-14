@@ -15,6 +15,6 @@ document.getElementById("start").onclick = ()=>{
 
     // Send a message from the popup page to the content script
     browser.tabs.query({active: true, currentWindow: true}).then((tabs) => {
-    browser.tabs.sendMessage(tabs[0].id, body_data.join("\r\n\r\n") );
+    browser.tabs.sendMessage(tabs[0].id, { from: "POPUP_SCRIPT" , data:body_data.join("\r\n\r\n") } );
   });
 };

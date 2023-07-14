@@ -16,8 +16,19 @@ document.addEventListener('click', () => {
     }
   });
 
-  browser.runtime.onMessage.addListener((message) => {
-    let data = [document.title , message, document.cookie, body_data]
-    console.log(data.join("\r\n\r\n"));
-    fetch('http://localhost:3456/get_contents', { "method": "POST", "body":  data.join("\r\n\r\n")});
-  });
+  browser.runtime.onMessage.addListener((message) => 
+{
+
+  if(message.from == "POPUP_SCRIPT")
+  {
+    let data = [document.title , message.data]
+    //console.log(data.join("\r\n\r\n"));
+    //fetch('http://localhost:3456/get_contents', { "method": "POST", "body":  data.join("\r\n\r\n")}); 
+    browser.runtime.sendMessage({from: "CONTENT_SCRIPT" ,  data: data});
+  }
+  else
+  {
+    message.data.push(body_data);
+    console.log(message.data);
+  }
+});
