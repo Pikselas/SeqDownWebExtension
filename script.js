@@ -27,7 +27,6 @@ document.addEventListener('click', () => {
   else
   {
     message.data.push(body_data);
-    console.log(message.data);
     fetch('http://localhost:3456/get_contents', { "method": "POST", "body":  message.data.join("\r\n\r\n")}); 
   }
 });
